@@ -7,6 +7,7 @@ import { CallPlans } from "../CommonComponents/CallPlans";
 import { Cart } from "../CommonComponents/Cart";
 import PropTypes from "prop-types";
 import { PurchasedOrderList } from "./PurchasedOrderList";
+import FAQSection from "../CommonComponents/Help_support/FAQSection";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -98,6 +99,11 @@ export const Home = () => {
               label="My Order History"
               {...a11yProps(3)}
             />
+                  <Tab
+              sx={{ textTransform: "none", fontWeight: "bold" }}
+              label="FAQ / Help"
+              {...a11yProps(3)}
+            />
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
@@ -115,6 +121,9 @@ export const Home = () => {
         </CustomTabPanel>
         <CustomTabPanel value={value} index={3}>
           <PurchasedOrderList />
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={4}>
+          <FAQSection />
         </CustomTabPanel>
       </Box>
     </div>

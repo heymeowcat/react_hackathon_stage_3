@@ -6,7 +6,6 @@ import ProtectUser from "./ProtectRoute/ProtectUser";
 import { PurchasedOrderList } from "../App/PurchasedOrderList";
 import { Home } from "./../App/Home";
 import Register from "../App/Register";
-import FAQSection from "../CommonComponents/Help_support/FAQSection";
 
 export const AllRoutes = () => {
   return (
@@ -16,7 +15,6 @@ export const AllRoutes = () => {
           <Route index element={<Login />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="help" element={<FAQSection />} />
         </Route>
         <Route path="/home" element={<ProtectUser />}>
           <Route index element={<Home />} />

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Button } from '@mui/material';
-import './ChatSystem.css';
+import { TextField, Button, Typography, Container, Paper, Box } from '@mui/material';
 
 const ChatSystem = () => {
   const [messages, setMessages] = useState([]);
@@ -24,17 +23,13 @@ const ChatSystem = () => {
       supportResponse = 'You can check your balance by dialing *123# on your phone.';
     } else if (userMessage.includes('plans') || userMessage.includes('data')) {
       supportResponse = 'We offer various data plans to suit your needs. You can find details on our website.';
-    }
-    else if (userMessage.includes('hi') || userMessage.includes('hello')) {
+    } else if (userMessage.includes('hi') || userMessage.includes('hello')) {
       supportResponse = 'Hello! How can I assist you today?';
-    }
-    else if (userMessage.includes('sim') || userMessage.includes('working')) {
-        supportResponse = 'If your sim is not working do try to remove and insert again';
-    } 
-     else if (userMessage.includes('network') || userMessage.includes('not working')) {
+    } else if (userMessage.includes('sim') || userMessage.includes('working')) {
+        supportResponse = 'If your sim is not working, try removing and reinserting it.';
+    } else if (userMessage.includes('network') || userMessage.includes('not working')) {
       supportResponse = 'You can try restarting your phone or contacting customer care.';
     }
-    
 
     setMessages([...messages, { text: newMessage, user: 'user' }, { text: supportResponse, user: 'support' }]);
   };
@@ -46,28 +41,44 @@ const ChatSystem = () => {
   };
 
   return (
-    <div className="telecom-chat">
-        <h3>Help/Support</h3>
-      <div className="chat-messages">
-        {messages.map((message, index) => (
-          <div key={index} className={`message ${message.user}`}>
-            {message.text}
-          </div>
-        ))}
-      </div>
-      <div className="input-area">
-        <TextField
-          type="text"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          onKeyPress={handleKeyPress}
-          placeholder="Type your message..."
-        />
-        <Button onClick={handleSendMessage} variant="contained" color="success">
-          Send
-        </Button>
-      </div>
-    </div>
+    <Container maxWidth="md" sx={{ mt: 4, textAlign: 'center' }}>
+      <Typography variant="h5" gutterBottom>
+        Help/Support
+      </Typography>
+      <Paper elevation={3} sx={{ padding: '1rem', minHeight: '400px', overflowY: 'auto' }}>
+        <Box className="chat-messages">
+          {messages.map((message, index) => (
+            <Box
+              key={index}
+              className={`message ${message.user}`}
+              sx={{
+                padding: '0.5rem',
+                borderRadius: '0.5rem',
+                backgroundColor: message.user === 'user' ? '#E2F2FF' : '#D4EDFF',
+                marginBottom: '0.5rem',
+                display: 'inline-block',
+              }}
+            >
+              {message.text}
+            </Box>
+          ))}
+        </Box>
+        <Box className="input-area" sx={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <TextField
+            type="text"
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Type your message..."
+            fullWidth
+            sx={{ flexGrow: 1 }}
+          />
+          <Button onClick={handleSendMessage} variant="contained" sx={{ backgroundColor: '#0C356A', color: '#FFFFFF' }}>
+            Send
+          </Button>
+        </Box>
+      </Paper>
+    </Container>
   );
 };
 
